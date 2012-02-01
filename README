@@ -1,4 +1,5 @@
-Osuuspankki-csv
+OSUUSPANKKI-CSV
+===============
 
 HI! Skripti muuttaa op.fi csv-muotoiset tiliotteet google docsin tsv-muotoon, jolloin ne voi suoraan copypasteta googleen. NICE.
 
