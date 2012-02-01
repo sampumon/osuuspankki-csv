@@ -1,0 +1,24 @@
+#!/bin/bash
+# Converts your OP.fi csv files into google docs tsv format
+# usage: $0 *.csv > master.txt
+
+# concat while excluding headers
+# NOTE: ==> seems to be deprecated
+tail -n +2 $* | grep -v "^==>" | \
+
+# convert from windows to locale encoding (utf-8)
+# also remove dos \r from last three lines 
+iconv -f windows-1252 | tr -d '\r' | \
+
+# fix the "&amp;amp;" bugs; try grep -P "&.*?;" to find more &-escaping bugs
+sed "s/amp;//g" | \
+
+# as of february 2010, also remove "Viesti:" from message field,
+# including 28 spaces of osuuspankki formatting fun
+sed "s/Viesti:                            //g" | \
+
+# squeeze 2/3 empty lines after each csv; cat -s would remove all 3
+uniq | \
+
+# final google docs txt/tab format workflow
+tr \; \\t
